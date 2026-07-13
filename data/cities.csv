@@ -1,0 +1,9 @@
+city_id,city_name,country_code,latitude,longitude,timezone,currency
+berlin,Berlin,DE,52.5200,13.4050,Europe/Berlin,EUR
+paris,Paris,FR,48.8566,2.3522,Europe/Paris,EUR
+vienna,Vienna,AT,48.2082,16.3738,Europe/Vienna,EUR
+amsterdam,Amsterdam,NL,52.3676,4.9041,Europe/Amsterdam,EUR
+prague,Prague,CZ,50.0755,14.4378,Europe/Prague,CZK
+warsaw,Warsaw,PL,52.2297,21.0122,Europe/Warsaw,PLN
+lisbon,Lisbon,PT,38.7223,-9.1393,Europe/Lisbon,EUR
+madrid,Madrid,ES,40.4168,-3.7038,Europe/Madrid,EUR
