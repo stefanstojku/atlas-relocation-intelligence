@@ -35,6 +35,20 @@ def get_city(city_id: str) -> dict[str, Any]:
 
     return dict(result)
 
+def get_city_ids() -> list[str]:
+    statement = text(
+        """
+        SELECT city_id
+        FROM raw.cities
+        ORDER BY city_id;
+        """
+    )
+
+    with engine.connect() as connection:
+        city_ids = connection.execute(statement).scalars().all()
+
+    return list(city_ids)
+
 
 def transform_weather(
     city_id: str,
@@ -148,12 +162,29 @@ def load_weather_for_city(
 
     return len(rows)
 
+def load_weather_for_all_cities(
+    start_date: str,
+    end_date: str,
+) -> int:
+    total_rows = 0
+
+    for city_id in get_city_ids():
+        row_count = load_weather_for_city(
+            city_id=city_id,
+            start_date=start_date,
+            end_date=end_date,
+        )
+
+        total_rows += row_count
+        print(f"Loaded {row_count} weather rows for {city_id}")
+
+    return total_rows
+
 
 if __name__ == "__main__":
-    row_count = load_weather_for_city(
-        city_id="berlin",
-        start_date="2025-01-01",
+    total_rows = load_weather_for_all_cities(
+        start_date="2021-01-01",
         end_date="2025-12-31",
     )
 
-    print(f"Loaded {row_count} weather rows for Berlin")
+    print(f"Loaded {total_rows} weather rows in total")
